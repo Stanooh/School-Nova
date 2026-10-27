@@ -1,0 +1,15 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteBase /project/School-Nova/
+
+# Redirect /page.php → /page in the browser URL bar
+RewriteCond %{THE_REQUEST} \s/+project/School-Nova/(.+?)\.php[\s?] [NC]
+RewriteRule ^ /project/School-Nova/%1 [R=301,L,NE]
+
+# Internally serve /page as /page.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^.]+)$ $1.php [NC,L]
+RewriteRule ^index(\.php)?$ /project/School-Nova/ [R=301,L]
